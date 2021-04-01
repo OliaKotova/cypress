@@ -1,6 +1,6 @@
 describe('delivery address management', function() {
     it('sets valid reachable delivery address', function() {
-        cy.viewport(1366, 768) //2nd in statistics
+        cy.viewport(1366, 768)
         cy.visit('https://wolt.com/en/delivers-to-me')
         cy.wait(4000) //waiting for interface to load
         cy.url()
@@ -18,15 +18,16 @@ describe('delivery address management', function() {
         cy.url()
           .should('include', 'en/delivers-to-me')
         cy.get ('[data-test-id="Buttons.UserLocation"]').scrollIntoView()
-          .should('have.text', 'S. Nėries gatvė 93') //expected outcome: valid address is set, address spelling is 'correct'        
+          .should('have.text', 'S. Nėries gatvė 93')
+        //expected outcome: valid address is set, address spelling is 'correct'         
     })
 
     it('changes to valid unreachable delivery address', function() {
-        cy.viewport(1920, 1080) //the most common resolution
+        cy.viewport(1366, 768)
         cy.get ('[data-test-id="Buttons.UserLocation"]').click()
         cy.get('#address').click()
           .clear()
-          .type('ул. Белинского 48') //unreachable address
+          .type('ул. Белинского 48')
         cy.get('.AddressPickerInput__root___upjJ8 > .Button__button___1o5LE').click()
         cy.get(':nth-child(1) > .AddressPickerInput__result___1Ex5g') //checking correctness of suggested alternatives till 40th line 
           .should('include.text', 'ул. Белинского')
@@ -39,24 +40,30 @@ describe('delivery address management', function() {
         cy.get(':nth-child(2) > .AddressPickerInput__result___1Ex5g')
           .should('include.text', 'ул. Белинского')
         cy.get('.AddressPickerInput__root___upjJ8 > .Button__button___1o5LE').click()
-        cy.get(':nth-child(2) > .AddressPickerInput__result___1Ex5g').click({waitForAnimations:false}) //option's selected
+        cy.get(':nth-child(2) > .AddressPickerInput__result___1Ex5g')
+          .click({waitForAnimations:false}) //option's selected
         cy.url()
           .should('include', 'en/delivers-to-me')
         cy.get ('[data-test-id="Buttons.UserLocation"]').scrollIntoView()
-          .should('have.text', 'vulica Bialinskaha 48') //expected outcome: unreachable address is set       
+          .should('have.text', 'vulica Bialinskaha 48')      
         cy.get('.OutOfReach__title___JcUWi')
-          .should('have.text', 'Sorry! There aren’t any places on Wolt near you – yet! 😕') //expected outcome: the message
+          .should('be.visible')
+          .should('have.text', 'Sorry! There aren’t any places on Wolt near you – yet! 😕')
+        //expected outcome: unreachable address is set; informing message is visible  
     })
 
     it('changes to invalid delivery address', function() {
-        cy.viewport(1536, 864) //3rd in statistics
+        cy.viewport(1366, 768)
         cy.get ('[data-test-id="Buttons.UserLocation"]').click()
         cy.get('#address').click()
           .clear()
-          .type('<&invAlid@@ADDRеSS?{}>') //invalid input
+          .type('<&invAlid@@ADDRеSS?{}>')
         cy.get('.AddressPickerInput__root___upjJ8 > .Button__button___1o5LE').click()
+        cy.get('#address').type('{enter}')
         cy.get('.AddressPickerInput__result___1Ex5g')
-          .should('have.text', 'No results') //expected outcome: address can't be set
+          .should('be.visible')
+          .should('have.text', 'No results')
+        //ExpRes: invalid address can't be set 
     })
 
 })

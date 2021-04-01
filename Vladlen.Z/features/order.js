@@ -1,5 +1,6 @@
 describe('Order', function() {
     it('adds one item to shopping cart', function() {
+      //Precondition: User is anonymous
         cy.viewport(1366,768)
         cy.visit ('https://wolt.com/en/ltu/vilnius/restaurant/cili-pizza-big')
         cy.wait(3000)
@@ -18,21 +19,24 @@ describe('Order', function() {
         cy.get('[data-localization-key="order.status-login"]')
           .should('be.visible')
           .should('include.text', 'Log in to order')
+        //ExpRes: 'Log in to order' button appears
     })
 
     it('adds additional accessories', function() {
-        cy.viewport(1920,1080)
+        cy.viewport(1366,768)
         cy.wait(4000)
         cy.get(':nth-child(2) > :nth-child(2) > :nth-child(1) > .MenuItem__itemContainer___1ylSL > .MenuItem__toggle___jBcIm > :nth-child(1) > .MenuItem__contentBorderContainer___3Os_h > .MenuItem__contentArea___Lj3rK')
           .scrollIntoView()
           .click()
-        cy.get('.Option__optionToggle___5ET87').click()
+        cy.get(':nth-child(2) > .Option__optionToggle___5ET87').click()
         cy.get(':nth-child(1) > .MenuOptionChooserValue__optionValue___3pkLP > .MenuOptionChooserValue__optionValueLeftContainer___lRW_P')
           .click()
         cy.get('.MenuOptionChooserValue__optionValueBall___2ps8D > div > .icon')
-          .should('be.visible') // assertion
+          .should('be.visible')
         cy.get('[data-localization-key="order.status-login"]')
           .should('be.visible')
           .should('include.text', 'Log in to order')
+        //ExpRes: additional accessories added to primary item; 
+        //'Log in to order' button is visible and clickable
     })
 })

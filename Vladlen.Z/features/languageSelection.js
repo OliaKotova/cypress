@@ -1,5 +1,5 @@
 describe('language selection', function() {
-    it('selects Russian restaurant page language', function() {
+    it('selects Russian as restaurant page language', function() {
         cy.viewport(1366,768)
         cy.visit ('https://wolt.com/en/ltu/vilnius/restaurant/cili-pizza-big')
         cy.wait(3000)
@@ -18,11 +18,12 @@ describe('language selection', function() {
         cy.viewport(1366,768)
         cy.wait(3000)
         cy.get('.LanguageSelector__TextButton-sc-1yfb4nd-2 > span').click()
+        cy.wait(3000)
         cy.get('[data-localization-key="menu.translate-prompt"]').scrollIntoView()
           .should('include.text', 'This menu is in Lithuanian')
     })
 
-    it('selects English restaurant page language', function() {
+    it('selects English as restaurant page language', function() {
         cy.viewport(1366,768)
         cy.wait(3000)
         cy.get('.LanguageSelector__TextButton-sc-1yfb4nd-2 > span').scrollIntoView()
