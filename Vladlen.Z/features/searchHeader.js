@@ -1,6 +1,10 @@
 describe('search for item categories', function() {
+
+  beforeEach(() => {
+    cy.viewport(1366,768)
+  })
+
     it('is looking for pizza as valid option', function() {
-        cy.viewport(1366, 768)
         cy.visit('https://wolt.com/en/delivers-to-me')
         cy.wait(4000)
         cy.url()
@@ -19,12 +23,12 @@ describe('search for item categories', function() {
     })
 
     it('restaurant query', function() {
-      cy.viewport(1366,768)
       cy.get('#SearchInputAnimated-input-id').click()
         .clear()
         .type('cili pizza', { delay: 100 })
       cy.get('.ToolTipBase__content___3AC4h')
         .should('be.visible')
+      cy.wait(4000)
       cy.get('[class="Search__name___uq0of"]')
         .should('have.length', 2)
         .and('be.visible')
@@ -40,7 +44,6 @@ describe('search for item categories', function() {
   })
 
     it('is looking for nails as invalid option', function() {
-        cy.viewport(1366, 768)
         cy.get('#SearchInputAnimated-input-id').click()
           .clear()
           .type('nails')

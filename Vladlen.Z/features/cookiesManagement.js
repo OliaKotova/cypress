@@ -1,6 +1,10 @@
 describe('cookies management', function() {
+
+  beforeEach(() => {
+    cy.viewport(1366,768)
+  })
+
     it('accepts cookies', function() {
-        cy.viewport(1366,768)
         cy.visit('https://wolt.com/')
         //ExpRes: User have to accept cookies to continue
         cy.get('.noscroll') //prevents User from scrolling
@@ -29,7 +33,6 @@ describe('cookies management', function() {
     })
 
     it('toggles additional options', function(){
-      cy.viewport(1366,768)
       cy.visit('https://wolt.com/')
       //ExpRes: User can't uncheck neccessary cookies
       cy.get(':nth-child(1) > .Button__button___1o5LE > span').click()

@@ -1,6 +1,10 @@
 describe('cookies localization', function() {
-  it('verifies legal info correspondence to requirements EN', function() {
+
+  beforeEach(() => {
     cy.viewport(1366,768)
+  })
+
+  it('verifies legal info correspondence to requirements EN', function() {
     cy.visit('https://wolt.com/en/discovery')
     cy.get(':nth-child(1) > .Button__button___1o5LE > span')
       .should('be.visible')
@@ -34,7 +38,6 @@ describe('cookies localization', function() {
     })
 
   it('verifies legal info correspondence to requirements RU', function() {
-    cy.viewport(1366,768)
     cy.visit('https://wolt.com/ru/discovery')
     cy.get(':nth-child(1) > .Button__button___1o5LE > span')
       .should('be.visible')

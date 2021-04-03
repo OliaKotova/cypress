@@ -1,8 +1,12 @@
 describe('delivery address management', function() {
+
+  beforeEach(() => {
+    cy.viewport(1366,768)
+  })
+
     it('sets valid reachable delivery address', function() {
-        cy.viewport(1366, 768)
         cy.visit('https://wolt.com/en/delivers-to-me')
-        cy.wait(4000) //waiting for interface to load
+        cy.wait(4000)
         cy.url()
           .should('include', 'en/delivers-to-me')
         cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]').click() //cookies acception
@@ -19,11 +23,10 @@ describe('delivery address management', function() {
           .should('include', 'en/delivers-to-me')
         cy.get ('[data-test-id="Buttons.UserLocation"]').scrollIntoView()
           .should('have.text', 'S. Nėries gatvė 93')
-        //expected outcome: valid address is set, address spelling is 'correct'         
+        //ExpRes: valid address is set, address spelling is 'correct'         
     })
 
     it('changes to valid unreachable delivery address', function() {
-        cy.viewport(1366, 768)
         cy.get ('[data-test-id="Buttons.UserLocation"]').click()
         cy.get('#address').click()
           .clear()
@@ -53,7 +56,6 @@ describe('delivery address management', function() {
     })
 
     it('changes to invalid delivery address', function() {
-        cy.viewport(1366, 768)
         cy.get ('[data-test-id="Buttons.UserLocation"]').click()
         cy.get('#address').click()
           .clear()
