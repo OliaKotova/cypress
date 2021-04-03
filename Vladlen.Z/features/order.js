@@ -1,15 +1,19 @@
 describe('Order', function() {
+
+  beforeEach(() => {
+    cy.viewport(1366,768)
+  })
+
     it('adds one item to shopping cart', function() {
       //Precondition: User is anonymous
-        cy.viewport(1366,768)
         cy.visit ('https://wolt.com/en/ltu/vilnius/restaurant/cili-pizza-big')
         cy.wait(3000)
         cy.url()
           .should('include', 'restaurant/cili-pizza-big')
         cy.get('.ConsentsBanner__buttons___1PPnk > :nth-child(2) > .Button__button___1o5LE')
             .click()
-        cy.get(':nth-child(2) > .Categories__button___2PxO7 > span').click()
-        cy.get(':nth-child(2) > :nth-child(1) > .MenuCategoryHeader__categoryArea___1PvcF > .MenuCategoryHeader__categoryHeader___qPjVL > .MenuCategoryHeader__category___pHQFw')
+        cy.get(':nth-child(1) > .Categories__button___2PxO7 > span').click()
+        cy.get(':nth-child(1) > :nth-child(1) > .MenuCategoryHeader__categoryArea___1PvcF > .MenuCategoryHeader__categoryHeader___qPjVL > .MenuCategoryHeader__category___pHQFw')
           .should('have.text', 'Picos 42 cm')
         cy.get('.CheckoutButton__button___2P0s-')
           .should('be.visible')
@@ -23,8 +27,6 @@ describe('Order', function() {
     })
 
     it('adds additional accessories', function() {
-        cy.viewport(1366,768)
-        cy.wait(4000)
         cy.get(':nth-child(2) > :nth-child(2) > :nth-child(1) > .MenuItem__itemContainer___1ylSL > .MenuItem__toggle___jBcIm > :nth-child(1) > .MenuItem__contentBorderContainer___3Os_h > .MenuItem__contentArea___Lj3rK')
           .scrollIntoView()
           .click()
