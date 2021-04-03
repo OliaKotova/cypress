@@ -18,6 +18,27 @@ describe('search for item categories', function() {
         //ExpRes: correct page is loaded
     })
 
+    it('restaurant query', function() {
+      cy.viewport(1366,768)
+      cy.get('#SearchInputAnimated-input-id').click()
+        .clear()
+        .type('cili pizza', { delay: 100 })
+      cy.get('.ToolTipBase__content___3AC4h')
+        .should('be.visible')
+      cy.get('[class="Search__name___uq0of"]')
+        .should('have.length', 2)
+        .and('be.visible')
+        .and('contain.text', 'Čili pizza')
+      cy.get('[data-localization-key="search.show-results"]')
+        .should('be.visible')
+        .and('contain.text', 'Show all')
+      cy.get('#SearchInputAnimated-input-id').type('{Enter}')
+      cy.url()
+        .should('include', 'en/search?q=cili%20pizza')
+      cy.get('[class="ListPage__title___2qZT8"]')
+        .should('contain.text', 'cili pizza')
+  })
+
     it('is looking for nails as invalid option', function() {
         cy.viewport(1366, 768)
         cy.get('#SearchInputAnimated-input-id').click()
@@ -38,5 +59,4 @@ describe('search for item categories', function() {
           .should('have.text', 'Please try searching for something else instead')
         //ExpRes: correct page is loaded; User is informed about absence of the item looked for
   })
-
 })
