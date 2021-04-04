@@ -1,4 +1,4 @@
-https://wolt.com/en/ltu/vilnius/restaurant/kraken-pizza
+
 describe('Order management', function() {
     it('Adding dishes to the order', function(){
         cy.viewport(1280, 800)
