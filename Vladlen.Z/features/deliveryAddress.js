@@ -6,20 +6,17 @@ describe('delivery address management', function() {
 
     it('sets valid reachable delivery address', function() {
         cy.visit('https://wolt.com/en/delivers-to-me')
-        cy.wait(4000)
         cy.url()
           .should('include', 'en/delivers-to-me')
-        cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]').click() //cookies acception
+        cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]', {timeout:5000}).click() //cookies acception
         cy.get('[data-localization-key="delivery.no-address-link"]').click()
         cy.get('[id="address"]')
           .type('s neries g93') //'casual' input spelling is likely to change into correct one later
           .should('have.value', 's neries g93')
         cy.get ('[data-localization-key="front-view.fetch-address"]').click()
-        cy.wait(3000)
-        cy.get ('[class="AddressPickerInput__result___1Ex5g"]')
+        cy.get ('[class="AddressPickerInput__result___1Ex5g"]', {timeout:5000})
         cy.contains ('S. Nėries g. 93').click()
-        cy.wait(3000)
-        cy.url()
+        cy.url({timeout:5000})
           .should('include', 'en/delivers-to-me')
         cy.get ('[data-test-id="Buttons.UserLocation"]').scrollIntoView()
           .should('have.text', 'S. Nėries gatvė 93')

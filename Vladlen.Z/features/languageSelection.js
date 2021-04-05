@@ -1,4 +1,4 @@
-describe('language selection', function() {
+describe('restaurant page: language selection', function() {
 
   beforeEach(() => {
     cy.viewport(1366,768)
@@ -6,8 +6,7 @@ describe('language selection', function() {
 
     it('selects Russian as restaurant page language', function() {
         cy.visit ('https://wolt.com/en/ltu/vilnius/restaurant/cili-pizza-big')
-        cy.wait(3000)
-        cy.url()
+        cy.url({timeout:5000})
           .should('include', 'restaurant/cili-pizza-big')
         cy.get('.ConsentsBanner__buttons___1PPnk > :nth-child(2) > .Button__button___1o5LE').click()
         cy.get('.LanguageSelector__TextButton-sc-1yfb4nd-2 > span').scrollIntoView()
@@ -19,16 +18,16 @@ describe('language selection', function() {
     })
 
     it('selects original restaurant page language', function() {
-        cy.wait(3000)
-        cy.get('.LanguageSelector__TextButton-sc-1yfb4nd-2 > span').click()
-        cy.wait(3000)
-        cy.get('[data-localization-key="menu.translate-prompt"]').scrollIntoView()
+        cy.get('.LanguageSelector__TextButton-sc-1yfb4nd-2 > span', {timeout:5000})
+          .click()
+        cy.get('[data-localization-key="menu.translate-prompt"]', {timeout:5000})
+          .scrollIntoView()
           .should('include.text', 'This menu is in Lithuanian')
     })
 
     it('selects English as restaurant page language', function() {
-        cy.wait(3000)
-        cy.get('.LanguageSelector__TextButton-sc-1yfb4nd-2 > span').scrollIntoView()
+        cy.get('.LanguageSelector__TextButton-sc-1yfb4nd-2 > span', {timeout:5000})
+          .scrollIntoView()
           .click()
         cy.get('.Select__arrowDown___tdHIs').click()
         cy.get('[id="react-select-3--option-3"]').click()

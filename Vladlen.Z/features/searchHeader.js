@@ -6,15 +6,13 @@ describe('search for item categories', function() {
 
     it('is looking for pizza as valid option', function() {
         cy.visit('https://wolt.com/en/delivers-to-me')
-        cy.wait(4000)
-        cy.url()
+        cy.url({timeout:5000})
           .should('include', 'en/delivers-to-me')
         cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]').click() //cookies acception
         cy.get('[data-test-id="SearchInput"]')
           .type('pizza')
           .should('have.value','pizza') //valid search query
-        cy.wait(4000)
-        cy.get('[data-localization-key="search.show-results"]').click()
+        cy.get('[data-localization-key="search.show-results"]', {timeout:5000}).click()
         cy.url()
           .should('include', 'search?q=pizza')
         cy.get('[data-test-id="SearchInput"]')
@@ -28,8 +26,7 @@ describe('search for item categories', function() {
         .type('cili pizza', { delay: 100 })
       cy.get('.ToolTipBase__content___3AC4h')
         .should('be.visible')
-      cy.wait(4000)
-      cy.get('[class="Search__name___uq0of"]')
+      cy.get('[class="Search__name___uq0of"]', {timeout:5000})
         .should('have.length', 2)
         .and('be.visible')
         .and('contain.text', 'Čili pizza')
@@ -48,8 +45,7 @@ describe('search for item categories', function() {
           .clear()
           .type('nails')
           .should('have.value', 'nails') //invalid search query
-        cy.wait(4000)
-        cy.get('.Search__info-text-item___17UrV')
+        cy.get('.Search__info-text-item___17UrV', {timeout:5000})
           .should('have.text', 'Nothing came up with that search 😕') 
         cy.get('#SearchInputAnimated-input-id').type('{enter}')
         cy.url()

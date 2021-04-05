@@ -7,8 +7,7 @@ describe('Order', function() {
     it('adds one item to shopping cart', function() {
       //Precondition: User is anonymous
         cy.visit ('https://wolt.com/en/ltu/vilnius/restaurant/cili-pizza-big')
-        cy.wait(3000)
-        cy.url()
+        cy.url({timeout:5000})
           .should('include', 'restaurant/cili-pizza-big')
         cy.get('.ConsentsBanner__buttons___1PPnk > :nth-child(2) > .Button__button___1o5LE')
             .click()
