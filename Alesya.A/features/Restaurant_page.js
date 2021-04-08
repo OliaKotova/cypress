@@ -1,10 +1,10 @@
-context('Restaurant page', () => {
+context('Creating an order', () => {
 
    beforeEach(() => {
       cy.viewport(1366, 768)
-      cy.visit('https://wolt.com/en/ltu/kaunas/restaurant/mamma-pizza-vytauto-pr').wait(5000)
-      cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]').click()
-   })
+      cy.visit('https://wolt.com/en/ltu/kaunas/restaurant/mamma-pizza-vytauto-pr')
+      cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]',{ timeout: 8000 }).should('be.visible').click() 
+  })
 
    it('Restaurant information method 1', () => {
    cy.get('.VenueStickyHeader__center___2P9bk').should('exist').click()
@@ -27,7 +27,5 @@ context('Restaurant page', () => {
    cy.get('.VenueSide__content___35ENR > :nth-child(5)').scrollIntoView().should('be.visible')
    cy.contains('+37061015590').should('exist')
    cy.contains('http://www.mammapizza.lt/').should('exist')
-
    })
-
 })

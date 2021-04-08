@@ -1,0 +1,21 @@
+context('Creating an order', () => {
+
+   beforeEach(() => {
+      cy.viewport(1366, 768)
+      cy.visit('https://wolt.com/en/ltu/kaunas/restaurant/mamma-pizza-vytauto-pr')
+      cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]',{ timeout: 8000 }).should('be.visible').click() 
+   })
+
+   it('Adding a dish to an order', () => {
+      cy.get('.Categories__root___3h645').should('be.visible')
+      cy.contains('Mamma suktinukai').scrollIntoView().click()
+      cy.get(':nth-child(4) > :nth-child(2) > :nth-child(1) > .MenuItem__itemContainer___1ylSL > .MenuItem__toggle___jBcIm > :nth-child(1) > .MenuItem__contentBorderContainer___3Os_h > .MenuItem__contentArea___Lj3rK > .MenuItem__content___BHqdW > .MenuItem__name___2bEqM',{ timeout: 8000 })
+      .should('be.visible').click()
+      cy.get('[data-localization-key="menu.add-to-order"]').click()
+      cy.get('[class="Categories__root___3h645 rtl"]')
+      cy.get('[class="Categories__button___2PxO7"]').contains('Gėrimai').click()
+      cy.get('[data-test-id="MenuItemContentArea"]').contains('Fanta 0,25 l').click()
+      cy.get('[class="QuantityControls__optionCounter___3SsdH"]')
+      cy.get('[data-test-id="Containers.Buttons.CheckoutButton"] > .CheckoutButton__loginButton___CN6Za').click()
+   })
+})

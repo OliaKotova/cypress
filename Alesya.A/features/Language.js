@@ -1,12 +1,12 @@
 context('Checking the page translation', () => {
 
    beforeEach(() => {
-      cy.viewport(1366, 768).wait(2000)
-      cy.visit('https://wolt.com/').wait(5000)
-      cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]').click()
+      cy.viewport(1366, 768)
+      cy.visit('https://wolt.com/')
+      cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]', { timeout: 8000 }).should('be.visible').click()
    })
    it('Russian', () => {
-      cy.get('#user-status-language-title').click().wait(2000)
+      cy.get('#user-status-language-title').click()
       cy.get('.UserStatus__language-option___6QxqQ').children()
       cy.contains('Русский').click().wait(2000)
       cy.reload()
@@ -17,7 +17,7 @@ context('Checking the page translation', () => {
    })
 
    it('Azerbaijani', () => {
-      cy.get('#user-status-language-title').click().wait(2000)
+      cy.get('#user-status-language-title').click()
       cy.get('.UserStatus__language-option___6QxqQ').children()
       cy.contains('Azerbaijani').click().wait(2000)
       cy.reload()
@@ -28,7 +28,7 @@ context('Checking the page translation', () => {
    })
 
    it('Latvia', () => {
-      cy.get('#user-status-language-title').click().wait(2000)
+      cy.get('#user-status-language-title').click()
       cy.get('.UserStatus__language-option___6QxqQ').children()
       cy.contains('Latviešu').click().wait(2000)
       cy.reload()
@@ -39,7 +39,7 @@ context('Checking the page translation', () => {
    })
 
    it('Slovenian', () => {
-      cy.get('#user-status-language-title').click().wait(2000)
+      cy.get('#user-status-language-title').click()
       cy.get('.UserStatus__language-option___6QxqQ').children()
       cy.contains('Slovenščina').click().wait(2000)
       cy.reload()
@@ -50,7 +50,7 @@ context('Checking the page translation', () => {
    })
 
    it('Japanese', () => {
-      cy.get('#user-status-language-title').click().wait(2000)
+      cy.get('#user-status-language-title').click()
       cy.get('.UserStatus__language-option___6QxqQ').children()
       cy.contains('日本語').click().wait(2000)
       cy.reload()
@@ -61,7 +61,7 @@ context('Checking the page translation', () => {
    })
 
    it('English', () => {
-      cy.get('#user-status-language-title').click().wait(2000)
+      cy.get('#user-status-language-title').click()
       cy.get('.UserStatus__language-option___6QxqQ').children()
       cy.contains('English').click().wait(2000)
       cy.reload()
@@ -72,7 +72,7 @@ context('Checking the page translation', () => {
    })
 
    it('Lithuanian', () => {
-      cy.get('#user-status-language-title').click().wait(2000)
+      cy.get('#user-status-language-title').click()
       cy.get('.UserStatus__language-option___6QxqQ').children()
       cy.contains('Lietuvių').click().wait(2000)
       cy.reload()
@@ -83,7 +83,7 @@ context('Checking the page translation', () => {
    })
 
    it('Polish', () => {
-      cy.get('#user-status-language-title').click().wait(2000)
+      cy.get('#user-status-language-title').click()
       cy.get('.UserStatus__language-option___6QxqQ').children()
       cy.contains('Polski').click().wait(2000)
       cy.reload()
@@ -93,8 +93,8 @@ context('Checking the page translation', () => {
       cy.url().should('include', 'pl')
    })
 
-   it.only('Czech', () => {
-      cy.get('#user-status-language-title').click().wait(2000)
+   it('Czech', () => {
+      cy.get('#user-status-language-title').click()
       cy.get('.UserStatus__language-option___6QxqQ').children()
       cy.contains('Čeština').click().wait(2000)
       cy.reload()
@@ -105,7 +105,7 @@ context('Checking the page translation', () => {
    })
 
    it('Georgian', () => {
-      cy.get('#user-status-language-title').click().wait(2000)
+      cy.get('#user-status-language-title').click()
       cy.get('.UserStatus__language-option___6QxqQ').children()
       cy.contains('ქართული').click().wait(2000)
       cy.reload()
@@ -116,7 +116,7 @@ context('Checking the page translation', () => {
    })
 
    it('Greek', () => {
-      cy.get('#user-status-language-title').click().wait(2000)
+      cy.get('#user-status-language-title').click()
       cy.get('.UserStatus__language-option___6QxqQ').children()
       cy.contains('Ελληνικά').click().wait(2000)
       cy.reload()
@@ -127,7 +127,7 @@ context('Checking the page translation', () => {
    })
 
    it('Slovakian', () => {
-      cy.get('#user-status-language-title').click().wait(2000)
+      cy.get('#user-status-language-title').click()
       cy.get('.UserStatus__language-option___6QxqQ').children()
       cy.contains('Slovak').click().wait(2000)
       cy.reload()
@@ -138,7 +138,7 @@ context('Checking the page translation', () => {
    })
 
    it('Hrvatski', () => {
-      cy.get('#user-status-language-title').click().wait(2000)
+      cy.get('#user-status-language-title').click()
       cy.get('.UserStatus__language-option___6QxqQ').children()
       cy.contains('Hrvatski').click().wait(2000)
       cy.reload()
@@ -147,5 +147,4 @@ context('Checking the page translation', () => {
       cy.get('.LottiePlayer__container___pgY3o > svg').click()
       cy.url().should('include', 'hr')
    })
-
 })
