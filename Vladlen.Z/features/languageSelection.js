@@ -1,4 +1,4 @@
-const baseUrl = require('C:/Users/HP/cypress/fixtures/cypress.env.json')
+const baseUrl = require('C:/Users/cypress.env.json')
 
 describe('restaurant page: language selection, desktop', function() {
 

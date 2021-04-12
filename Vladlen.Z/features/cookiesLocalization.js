@@ -1,6 +1,6 @@
 describe('cookies localization', function() {
   
-    const baseUrl = require('C:/Users/HP/cypress/fixtures/cypress.env.json')
+    const baseUrl = require('C:/Users/cypress.env.json')
     const baseUrlen = baseUrl + 'en/discovery'
     const baseUrlru = baseUrl + 'ru/discovery'
 
