@@ -1,5 +1,4 @@
-const baseUrl = 'https://www.wolt.com/en/delivers-to-me/'
-
+const baseUrl = require('C:/Users/HP/cypress/fixtures/cypress.env.json')
 
 describe('search for item categories header: desktop', function() {
 
@@ -9,7 +8,7 @@ describe('search for item categories header: desktop', function() {
   })
 
     it('is looking for pizza as valid option', function() {
-        cy.visit(baseUrl)
+        cy.visit(baseUrl + 'en/delivers-to-me/')
         cy.url({timeout:5000})
           .should('include', 'en/delivers-to-me')
         cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]').click() //cookies acception
@@ -51,7 +50,7 @@ describe('search for item categories header: mobile', function() {
   })
 
     it('is looking for pizza as valid option mobile', function() {
-        cy.visit(baseUrl)
+        cy.visit(baseUrl + 'en/delivers-to-me/')
         cy.url({timeout:5000})
           .should('include', 'en/delivers-to-me')
         cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]').click() //cookies acception

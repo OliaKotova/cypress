@@ -1,4 +1,4 @@
-const baseUrl = 'https://www.wolt.com/'
+const baseUrl = require('C:/Users/HP/cypress/fixtures/cypress.env.json')
 
 describe('cookies management: desktop', function() {
 

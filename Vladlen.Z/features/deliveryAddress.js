@@ -1,4 +1,4 @@
-const baseUrl = 'https://www.wolt.com/en/delivers-to-me/'
+const baseUrl = require('C:/Users/HP/cypress/fixtures/cypress.env.json')
 
 describe('delivery address management: desktop', function() {
 
@@ -7,7 +7,7 @@ describe('delivery address management: desktop', function() {
   })
 
     it('sets valid reachable delivery address: desktop', function() {
-        cy.visit(baseUrl)
+        cy.visit(baseUrl + 'en/delivers-to-me/')
         cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]', {timeout:5000}).click() //cookies acception
         cy.get('[data-localization-key="delivery.no-address-link"]').click()
         cy.get('[id="address"]')
@@ -74,7 +74,7 @@ describe('delivery address management: mobile', function() {
   })
 
     it('sets valid reachable delivery address: mobile', function() {
-        cy.visit(baseUrl)
+        cy.visit(baseUrl +'en/delivers-to-me/')
         cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]', {timeout:5000}).click() //cookies acception
         cy.get('[data-localization-key="delivery.no-address-link"]').click()
         cy.get('[id="address"]')

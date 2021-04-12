@@ -1,8 +1,8 @@
 describe('cookies localization', function() {
   
-
-    const baseUrlen = 'https://wolt.com/en/discovery'
-    const baseUrlru = 'https://wolt.com/ru/discovery'
+    const baseUrl = require('C:/Users/HP/cypress/fixtures/cypress.env.json')
+    const baseUrlen = baseUrl + 'en/discovery'
+    const baseUrlru = baseUrl + 'ru/discovery'
 
     const text1en = require('C:/Users/HP/cypress/integration/examples/wolt/cookiesLocalText/cookiesLoc_1en.json')
     const text2en = require('C:/Users/HP/cypress/integration/examples/wolt/cookiesLocalText/cookiesLoc_2en.json')
