@@ -1,13 +1,14 @@
-const baseUrl = require('C:/Users/cypress.env.json')
-
 describe('cookies management: desktop', function() {
 
-  beforeEach(() => {
+  beforeEach(function () {
     cy.viewport(1920, 1080)
+    cy.fixture('baseUrl').then(function (baseUrl) {
+        this.baseUrl = baseUrl
+    })
   })
 
     it('accepts cookies: desktop', function() {
-        cy.visit('https://wolt.com/')
+        cy.visit(this.baseUrl.baseURL1)
         //ExpRes: User have to accept cookies to continue
         cy.get('.noscroll') //prevents User from scrolling
           .should('exist')
@@ -35,7 +36,7 @@ describe('cookies management: desktop', function() {
     })
 
     it('toggles additional options: desktop', function(){
-      cy.visit('https://wolt.com/')
+      cy.visit(this.baseUrl.baseURL1)
       //ExpRes: User can't uncheck neccessary cookies
       cy.get(':nth-child(1) > .Button__button___1o5LE > span').click()
       cy.get('.ManageConsentsDialog__root___1ZEAt')
@@ -54,12 +55,15 @@ describe('cookies management: desktop', function() {
 
 describe('cookies management: mobile', function() {
 
-  beforeEach(() => {
+  beforeEach(function () {
     cy.viewport(360, 640)
+    cy.fixture('baseUrl').then(function (baseUrl) {
+        this.baseUrl = baseUrl
+    })
   })
 
   it('accepts cookies: mobile', function() {
-      cy.visit(baseUrl)
+      cy.visit(this.baseUrl.baseURL1)
       //ExpRes: User have to accept cookies to continue
       cy.get('.noscroll') //prevents User from scrolling
       .should('exist')
@@ -87,7 +91,7 @@ describe('cookies management: mobile', function() {
     })
 
     it('toggles additional options: mobile', function(){
-      cy.visit(baseUrl)
+      cy.visit(this.baseUrl.baseURL1)
       //ExpRes: User can't uncheck neccessary cookies
       cy.get(':nth-child(1) > .Button__button___1o5LE > span').click()
       cy.get('.ManageConsentsDialog__content___2rvRt')

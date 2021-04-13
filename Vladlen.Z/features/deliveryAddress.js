@@ -1,23 +1,24 @@
-const baseUrl = require('C:/Users/cypress.env.json')
-
 describe('delivery address management: desktop', function() {
 
-  beforeEach(() => {
-    cy.viewport(1920,1080)
+  beforeEach(function () {
+    cy.viewport(1920, 1080)
+    cy.fixture('baseUrl').then(function (baseUrl) {
+        this.baseUrl = baseUrl
+    })
   })
 
     it('sets valid reachable delivery address: desktop', function() {
-        cy.visit(baseUrl + 'en/delivers-to-me/')
-        cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]', {timeout:5000}).click() //cookies acception
+        cy.visit(this.baseUrl.baseUrlDeliveryEN)
+        cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]', {timeout:10000}).click() //cookies acception
         cy.get('[data-localization-key="delivery.no-address-link"]').click()
         cy.get('[id="address"]')
           .type('s neries g93') //'casual' input spelling is likely to change into correct one later
           .should('have.value', 's neries g93')
         cy.get ('[data-localization-key="front-view.fetch-address"]').click()
-        cy.get ('[class="AddressPickerInput__result___1Ex5g"]', {timeout:5000})
-        cy.contains ('S. Nėries g. 93', {timeout:7000})
+        cy.get ('[class="AddressPickerInput__result___1Ex5g"]', {timeout:10000})
+        cy.contains ('S. Nėries g. 93', {timeout:10000})
            .click()
-        cy.url({timeout:5000})
+        cy.url({timeout:10000})
           .should('include', 'en/delivers-to-me')
         cy.get ('[data-test-id="Buttons.UserLocation"]').scrollIntoView()
           .should('have.text', 'S. Nėries gatvė 93')
@@ -69,22 +70,25 @@ describe('delivery address management: desktop', function() {
 
 describe('delivery address management: mobile', function() {
 
-  beforeEach(() => {
+  beforeEach(function () {
     cy.viewport(360, 640)
+    cy.fixture('baseUrl').then(function (baseUrl) {
+        this.baseUrl = baseUrl
+    })
   })
 
     it('sets valid reachable delivery address: mobile', function() {
-        cy.visit(baseUrl +'en/delivers-to-me/')
-        cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]', {timeout:5000}).click() //cookies acception
+        cy.visit(this.baseUrl.baseUrlDeliveryEN)
+        cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]', {timeout:10000}).click() //cookies acception
         cy.get('[data-localization-key="delivery.no-address-link"]').click()
         cy.get('[id="address"]')
           .type('s neries g93') //'casual' input spelling is likely to change into correct one later
           .should('have.value', 's neries g93')
         cy.get ('[data-localization-key="front-view.fetch-address"]').click()
-        cy.get ('[class="AddressPickerInput__result___1Ex5g"]', {timeout:5000})
-        cy.contains ('S. Nėries g. 93', {timeout:7000})
+        cy.get ('[class="AddressPickerInput__result___1Ex5g"]', {timeout:10000})
+        cy.contains ('S. Nėries g. 93', {timeout:10000})
            .click()
-        cy.url({timeout:5000})
+        cy.url({timeout:10000})
           .should('include', 'en/delivers-to-me')
         cy.get ('[data-test-id="Buttons.UserLocation"]').scrollIntoView()
           .should('have.text', 'S. Nėries gatvė 93')

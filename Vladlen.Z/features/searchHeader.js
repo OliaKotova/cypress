@@ -1,15 +1,16 @@
-const baseUrl = require('C:/Users/cypress.env.json')
-
 describe('search for item categories header: desktop', function() {
 
 
-  beforeEach(() => {
+  beforeEach(function () {
     cy.viewport(1920, 1080)
+    cy.fixture('baseUrl').then(function (baseUrl) {
+        this.baseUrl = baseUrl
+    })
   })
 
     it('is looking for pizza as valid option', function() {
-        cy.visit(baseUrl + 'en/delivers-to-me/')
-        cy.url({timeout:5000})
+        cy.visit(this.baseUrl.baseUrlDeliveryEN)
+        cy.url({timeout:10000})
           .should('include', 'en/delivers-to-me')
         cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]').click() //cookies acception
         cy.get('[data-test-id="SearchInput"]')
@@ -28,14 +29,14 @@ describe('search for item categories header: desktop', function() {
           .clear()
           .type('nails')
           .should('have.value', 'nails') //invalid search query
-        cy.get('.Search__info-text-item___17UrV', {timeout:7000})
+        cy.get('.Search__info-text-item___17UrV', {timeout:10000})
           .should('be.visible') 
         cy.get('#SearchInputAnimated-input-id').type('{enter}')
         cy.url()
           .should('include', 'search?q=nails') 
         cy.get('#SearchInputAnimated-input-id')
           .should('have.value', 'nails')
-        cy.get('.RestaurantsNotFound__title___32Ni1 > span')
+        cy.get('.RestaurantsNotFound__title___32Ni1 > span', {timeout:10000})
           .should('be.visible') 
         cy.get('.RestaurantsNotFound__text___hjDDm > span')
           .should('be.visible')
@@ -45,13 +46,15 @@ describe('search for item categories header: desktop', function() {
 
 describe('search for item categories header: mobile', function() {
 
-  beforeEach(() => {
+  beforeEach(function () {
     cy.viewport(360, 640)
+    cy.fixture('baseUrl').then(function (baseUrl) {
+        this.baseUrl = baseUrl
+    })
   })
-
     it('is looking for pizza as valid option mobile', function() {
-        cy.visit(baseUrl + 'en/delivers-to-me/')
-        cy.url({timeout:5000})
+        cy.visit(this.baseUrl.baseUrlDeliveryEN)
+        cy.url({timeout:10000})
           .should('include', 'en/delivers-to-me')
         cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]').click() //cookies acception
         cy.get('[data-test-id="SearchInput"]')
@@ -69,14 +72,14 @@ describe('search for item categories header: mobile', function() {
           .clear()
           .type('nails')
           .should('have.value', 'nails') //invalid search query
-        cy.get('.Search__info-text-item___17UrV', {timeout:7000})
+        cy.get('.Search__info-text-item___17UrV', {timeout:10000})
           .should('be.visible') 
         cy.get('#SearchInputAnimated-input-id').type('{enter}')
         cy.url()
           .should('include', 'search?q=nails') 
         cy.get('#SearchInputAnimated-input-id')
           .should('have.value', 'nails')
-        cy.get('.RestaurantsNotFound__title___32Ni1 > span')
+        cy.get('.RestaurantsNotFound__title___32Ni1 > span', {timeout:10000})
           .should('be.visible')
         cy.get('.RestaurantsNotFound__text___hjDDm > span')
           .should('be.visible')
