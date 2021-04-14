@@ -27,6 +27,7 @@ describe('Search food', () => {
     cy.get('#SearchInputAnimated-input-id')
     .clear()
     .type('Vegan')
+    .should('have.value', 'Vegan')
     cy.wait(4000)
     cy.get('.Search__info-text-item___17UrV')
     .click()
@@ -37,8 +38,19 @@ describe('Search food', () => {
       cy.get('#SearchInputAnimated-input-id')
       .clear()
       .type('Sushi')
+      .should('have.value', 'Sushi')
       cy.wait(4000)
       cy.get('.Search__info-text-item___17UrV')
      .click()
    })
+
+
+       //Finding invalid food in Vilnius 
+       it('Invalid food.Quest', () => {
+        cy.get('#SearchInputAnimated-input-id')
+        .clear()
+        .type('SELENIUM')       
+        cy.get('.Search__info-text-item___17UrV')
+        .should('be.visible') 
+     })
 })
