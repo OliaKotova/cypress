@@ -1,0 +1,14 @@
+describe('Log in', () => {
+    it('Visiting Discovery.Quest', () => {
+    cy.visit('https://wolt.com')
+    cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]').click()
+    cy.get('[class="HeaderDropdown-module__title___2gWnQ UserStatus-module__title___2QIhD"]').click()
+    cy.get('[class="UserMenu-module__profileHeader___5o83L"]').click()
+    cy.get('#auth-modal-title > span').should('have.text', 'Create an account or log in')
+    cy.wait(5000)
+    cy.get('input[type="email"]'). type('olia1884@mail.ru')
+    cy.wait(5000)
+    cy.get('[data-localization-key="auth.method-select.next-button"]').click()
+    cy.wait(5000)
+   })
+})
