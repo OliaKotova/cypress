@@ -1,0 +1,28 @@
+describe('Search food ', () => {
+    it('Menu.Restaurant.Quest', () => {
+        cy.visit('https://wolt.com/en/ltu/vilnius/restaurant/wokeriai')
+        cy.viewport(1240, 800)
+        cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]').click()
+        cy.get(':nth-child(4) > .Categories-module__button___1pZfh > span').scrollIntoView().should('be.visible').click()      
+        cy.get(':nth-child(4) > :nth-child(1) > .MenuCategoryHeader-module__categoryArea___2vCPh > .MenuCategoryHeader-module__categoryHeader___3XakC > .MenuCategoryHeader__Heading-sc-1enduc0-0')
+        .should('have.text', 'Salotos')  
+    }) 
+     //Search for food category on the restaurant menu page
+    it('Menu.Restaurant.Quest', () => {
+        cy.visit('https://wolt.com/en/ltu/vilnius/restaurant/wokeriai')
+        cy.viewport(1240, 800)
+        cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]').click()
+        cy.get('.Description-module__end___3PeVe > .Input-module__root___TZj3T > #menu-search-input-id').type('Sriubos{enter}') 
+        cy.get('.MenuCategoryHeader__Heading-sc-1enduc0-0')
+        .should('have.text', 'Sriubos')
+    })
+    //Search for food with invalid name of catogory
+    it('Menu.Restaurant.Quest', () => {
+        cy.visit('https://wolt.com/en/ltu/vilnius/restaurant/wokeriai')
+        cy.viewport(1240, 800)
+        cy.get('[data-localization-key="gdpr-consents.banner.accept-button"]').click()
+        cy.get('.Description-module__end___3PeVe > .Input-module__root___TZj3T > #menu-search-input-id').type('pizza{enter}') 
+        cy.wait(4000)
+        cy.get('.SearchState-module__emptyStateText___12giV > span').should('have.text', 'Nothing came up for "pizza" 😕')
+})
+})
